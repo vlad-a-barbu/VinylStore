@@ -1,4 +1,4 @@
-namespace VinylStore.DataAccess.Models;
+namespace VinylStore.DataAccess.EF.Models;
 
 public enum Role : int
 {

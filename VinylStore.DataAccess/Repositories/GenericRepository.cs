@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using VinylStore.DataAccess.Models;
-using VinylStore.DataAccess.Models.Base;
+using VinylStore.DataAccess.EF;
+using VinylStore.DataAccess.EF.Models.Base;
 
 namespace VinylStore.DataAccess.Repositories;
 
@@ -38,6 +38,12 @@ public class GenericRepository<TEntity>
 
     public void Delete(TEntity entity)
     {
+        _entities.Remove(entity);
+    }
+    
+    public void Delete(Guid id)
+    {
+        var entity = Get(id) ?? throw new ArgumentException("Entity not found", nameof(id));
         _entities.Remove(entity);
     }
 

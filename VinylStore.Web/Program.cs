@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using VinylStore.DataAccess;
+using VinylStore.DataAccess.EF;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddDbContext<VinylStoreContext>(
     options =>
         options.UseNpgsql(builder.Configuration["ConnectionString"])
 );
+
+builder.Services.AddScoped(typeof(UnitOfWork));
 
 var app = builder.Build();
 

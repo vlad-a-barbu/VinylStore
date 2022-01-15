@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using VinylStore.DataAccess.Models;
+using VinylStore.DataAccess.EF.Models;
 
-namespace VinylStore.DataAccess;
+namespace VinylStore.DataAccess.EF;
 
 public class VinylStoreContext : DbContext
 {

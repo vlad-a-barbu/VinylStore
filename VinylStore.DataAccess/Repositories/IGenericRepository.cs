@@ -11,6 +11,7 @@ public interface IGenericRepository<TEntity>
     void Update(TEntity entity);
     
     void Delete(TEntity entity);
+    void Delete(Guid id);
     
     void Commit();
 }

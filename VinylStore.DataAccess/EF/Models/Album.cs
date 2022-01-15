@@ -1,5 +1,6 @@
-using VinylStore.DataAccess.Models.Base;
-namespace VinylStore.DataAccess.Models;
+using VinylStore.DataAccess.EF.Models.Base;
+
+namespace VinylStore.DataAccess.EF.Models;
 
 public class Album : IEntity
 {

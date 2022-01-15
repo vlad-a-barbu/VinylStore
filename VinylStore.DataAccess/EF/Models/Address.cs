@@ -1,6 +1,6 @@
-using VinylStore.DataAccess.Models.Base;
+using VinylStore.DataAccess.EF.Models.Base;
 
-namespace VinylStore.DataAccess.Models;
+namespace VinylStore.DataAccess.EF.Models;
 
 public class Address : IEntity
 {

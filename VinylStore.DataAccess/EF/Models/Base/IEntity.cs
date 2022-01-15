@@ -1,4 +1,4 @@
-namespace VinylStore.DataAccess.Models.Base;
+namespace VinylStore.DataAccess.EF.Models.Base;
 
 public interface IEntity
 {

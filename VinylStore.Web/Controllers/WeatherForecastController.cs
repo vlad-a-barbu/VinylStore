@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using VinylStore.DataAccess;
+using VinylStore.DataAccess.EF.Models;
 
 namespace VinylStore.Web.Controllers;
 
