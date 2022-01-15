@@ -1,8 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using VinylStore.DataAccess;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<VinylStoreContext>(
+    options =>
+        options.UseNpgsql(builder.Configuration["ConnectionString"])
+);
 
 var app = builder.Build();
 

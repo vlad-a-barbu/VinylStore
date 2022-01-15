@@ -2,6 +2,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinylStore.Web", "VinylStore.Web\VinylStore.Web.csproj", "{94C377CE-AFE4-4A92-9422-A86C76659AAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinylStore.Services", "VinylStore.Services\VinylStore.Services.csproj", "{9C8387E0-9F2D-49AD-989E-6A7214645C6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinylStore.Domain", "VinylStore.Domain\VinylStore.Domain.csproj", "{88883DC7-C616-4DCB-9BDA-3EE424E069FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinylStore.DataAccess", "VinylStore.DataAccess\VinylStore.DataAccess.csproj", "{04BF6B38-23DD-4222-8F49-FE8488AE5A52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +18,17 @@ Global
 		{94C377CE-AFE4-4A92-9422-A86C76659AAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94C377CE-AFE4-4A92-9422-A86C76659AAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94C377CE-AFE4-4A92-9422-A86C76659AAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C8387E0-9F2D-49AD-989E-6A7214645C6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C8387E0-9F2D-49AD-989E-6A7214645C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C8387E0-9F2D-49AD-989E-6A7214645C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C8387E0-9F2D-49AD-989E-6A7214645C6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88883DC7-C616-4DCB-9BDA-3EE424E069FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88883DC7-C616-4DCB-9BDA-3EE424E069FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88883DC7-C616-4DCB-9BDA-3EE424E069FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88883DC7-C616-4DCB-9BDA-3EE424E069FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04BF6B38-23DD-4222-8F49-FE8488AE5A52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04BF6B38-23DD-4222-8F49-FE8488AE5A52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04BF6B38-23DD-4222-8F49-FE8488AE5A52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04BF6B38-23DD-4222-8F49-FE8488AE5A52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
