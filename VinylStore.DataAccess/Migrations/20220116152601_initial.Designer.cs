@@ -2,10 +2,9 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using VinylStore.DataAccess;
 using VinylStore.DataAccess.EF;
 
 #nullable disable
@@ -13,25 +12,25 @@ using VinylStore.DataAccess.EF;
 namespace VinylStore.DataAccess.Migrations
 {
     [DbContext(typeof(VinylStoreContext))]
-    [Migration("20220115183605_Initial")]
-    partial class Initial
+    [Migration("20220116152601_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.1")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("PurchaseVinyl", b =>
                 {
                     b.Property<Guid>("PurchasesId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("VinylsId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("PurchasesId", "VinylsId");
 
@@ -40,47 +39,47 @@ namespace VinylStore.DataAccess.Migrations
                     b.ToTable("PurchaseVinyl");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.Address", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.Address", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AddressLine1")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AddressLine2")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.Album", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.Album", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ArtistId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("ReleaseDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("ReleaseDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -89,50 +88,50 @@ namespace VinylStore.DataAccess.Migrations
                     b.ToTable("Albums");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.Artist", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.Artist", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Artists");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.Genre", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.Genre", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.Purchase", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.Purchase", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("Discount")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -141,21 +140,21 @@ namespace VinylStore.DataAccess.Migrations
                     b.ToTable("Purchases");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.Song", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.Song", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AlbumId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("GenreId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -166,61 +165,62 @@ namespace VinylStore.DataAccess.Migrations
                     b.ToTable("Songs");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.User", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("AddressId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordSalt")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Role")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[AddressId] IS NOT NULL");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.Vinyl", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.Vinyl", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AlbumId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -231,22 +231,22 @@ namespace VinylStore.DataAccess.Migrations
 
             modelBuilder.Entity("PurchaseVinyl", b =>
                 {
-                    b.HasOne("VinylStore.DataAccess.Models.Purchase", null)
+                    b.HasOne("VinylStore.DataAccess.EF.Models.Purchase", null)
                         .WithMany()
                         .HasForeignKey("PurchasesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VinylStore.DataAccess.Models.Vinyl", null)
+                    b.HasOne("VinylStore.DataAccess.EF.Models.Vinyl", null)
                         .WithMany()
                         .HasForeignKey("VinylsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.Album", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.Album", b =>
                 {
-                    b.HasOne("VinylStore.DataAccess.Models.Artist", "Artist")
+                    b.HasOne("VinylStore.DataAccess.EF.Models.Artist", "Artist")
                         .WithMany("Albums")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -255,9 +255,9 @@ namespace VinylStore.DataAccess.Migrations
                     b.Navigation("Artist");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.Purchase", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.Purchase", b =>
                 {
-                    b.HasOne("VinylStore.DataAccess.Models.User", "User")
+                    b.HasOne("VinylStore.DataAccess.EF.Models.User", "User")
                         .WithMany("Purchases")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -266,15 +266,15 @@ namespace VinylStore.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.Song", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.Song", b =>
                 {
-                    b.HasOne("VinylStore.DataAccess.Models.Album", "Album")
+                    b.HasOne("VinylStore.DataAccess.EF.Models.Album", "Album")
                         .WithMany("Songs")
                         .HasForeignKey("AlbumId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VinylStore.DataAccess.Models.Genre", "Genre")
+                    b.HasOne("VinylStore.DataAccess.EF.Models.Genre", "Genre")
                         .WithMany("Songs")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -285,18 +285,18 @@ namespace VinylStore.DataAccess.Migrations
                     b.Navigation("Genre");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.User", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.User", b =>
                 {
-                    b.HasOne("VinylStore.DataAccess.Models.Address", "Address")
+                    b.HasOne("VinylStore.DataAccess.EF.Models.Address", "Address")
                         .WithOne("User")
-                        .HasForeignKey("VinylStore.DataAccess.Models.User", "AddressId");
+                        .HasForeignKey("VinylStore.DataAccess.EF.Models.User", "AddressId");
 
                     b.Navigation("Address");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.Vinyl", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.Vinyl", b =>
                 {
-                    b.HasOne("VinylStore.DataAccess.Models.Album", "Album")
+                    b.HasOne("VinylStore.DataAccess.EF.Models.Album", "Album")
                         .WithMany("Vinyls")
                         .HasForeignKey("AlbumId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -305,30 +305,30 @@ namespace VinylStore.DataAccess.Migrations
                     b.Navigation("Album");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.Address", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.Address", b =>
                 {
                     b.Navigation("User")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.Album", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.Album", b =>
                 {
                     b.Navigation("Songs");
 
                     b.Navigation("Vinyls");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.Artist", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.Artist", b =>
                 {
                     b.Navigation("Albums");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.Genre", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.Genre", b =>
                 {
                     b.Navigation("Songs");
                 });
 
-            modelBuilder.Entity("VinylStore.DataAccess.Models.User", b =>
+            modelBuilder.Entity("VinylStore.DataAccess.EF.Models.User", b =>
                 {
                     b.Navigation("Purchases");
                 });

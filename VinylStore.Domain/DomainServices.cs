@@ -1,5 +1,6 @@
 ﻿namespace VinylStore.Domain;
 
-public class Class1
+public class DomainServices
 {
+    
 }

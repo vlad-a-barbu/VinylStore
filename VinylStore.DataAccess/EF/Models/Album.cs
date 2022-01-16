@@ -6,7 +6,7 @@ public class Album : IEntity
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = null!;
-    public DateOnly ReleaseDate { get; set; }
+    public DateTime ReleaseDate { get; set; }
 
     public Guid ArtistId { get; set; }
     
