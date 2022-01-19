@@ -17,5 +17,5 @@ public class DomainServices
     public GenreDomainService Genre => _genreDomainService.Value;
 
     private readonly Lazy<UserDomainService> _userDomainService;
-    public UserDomainService UserDomainService => _userDomainService.Value;
+    public UserDomainService User => _userDomainService.Value;
 }
