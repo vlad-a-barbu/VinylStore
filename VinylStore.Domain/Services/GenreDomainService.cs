@@ -1,5 +1,6 @@
 using VinylStore.DataAccess;
 using VinylStore.DataObjects;
+using VinylStore.Domain.Base;
 using EFModels = VinylStore.DataAccess.EF.Models;
 
 namespace VinylStore.Domain.Services;
@@ -8,36 +9,42 @@ public class GenreDomainService : IDomainService<Genre>
 {
     private readonly UnitOfWork _uow;
 
-    public GenreDomainService(UnitOfWork uow) => _uow = uow;
+    public GenreDomainService(UnitOfWork uow)
+    {
+        _uow = uow;
+    }
 
-    public Genre? GetById(Guid id)
+    public Genre? Get(Guid id)
     {
         var genre = _uow.Genres.Get(id);
 
-        return genre is null ? null : new Genre
-        {
-            Id = genre!.Id,
-            Name = genre!.Name
-        };
+        return genre is null ? null :
+            Mapper.Builder
+                .For<EFModels.Genre, Genre>()
+                .Invoke(genre);
     }
 
     public IEnumerable<Genre> GetAll(Func<Genre, bool>? filter = null)
     {
-        var genres = _uow.Genres.GetAll().Select(g => new Genre
-        {
-            Id = g.Id,
-            Name = g.Name
-        }).ToList();
+        var genres = _uow.Genres
+            .GetAll()
+            .ToList()
+            .Select(genre => 
+                Mapper.Builder
+                    .For<EFModels.Genre, Genre>()
+                    .Invoke(genre)
+            );
 
         return filter is null ? genres : genres.Where(filter);
     }
     
     public void Create(Genre genre)
     {
-        _uow.Genres.Insert(new EFModels.Genre
-        {
-            Name = genre.Name
-        });
+        _uow.Genres.Insert(
+            Mapper.Builder
+                .For<Genre, EFModels.Genre>()
+                .Invoke(genre)
+        );
         
         _uow.SaveChanges();
     }
@@ -45,11 +52,13 @@ public class GenreDomainService : IDomainService<Genre>
     public void Update(Genre genre)
     {
         var entity = _uow.Genres.Get(genre.Id)
-                     ?? throw new ArgumentException(nameof(genre));
-
-        entity.Name = genre.Name;
+            ?? throw new ArgumentException($"Genre {genre.Id} not found", nameof(genre));
         
-        _uow.Genres.Update(entity);
+        _uow.Genres.Update(
+            Mapper.Builder
+                .For<Genre, EFModels.Genre>(entity)
+                .Invoke(genre)
+        );
         
         _uow.SaveChanges();
     }

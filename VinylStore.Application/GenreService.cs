@@ -5,13 +5,11 @@ namespace VinylStore.Application;
 
 public class GenreService : BaseService
 {
-    public GenreService(ServiceDependencies serviceDependencies) : base(serviceDependencies)
-    {
-    }
+    public GenreService(ServiceDependencies serviceDependencies) : base(serviceDependencies) { }
     
     public Genre GetById(Guid id)
     {
-        return ExecuteInTransaction(d => d.Genre.GetById(id))
+        return ExecuteInTransaction(d => d.Genre.Get(id))
             ?? throw new ArgumentException(nameof(id));
     }
 

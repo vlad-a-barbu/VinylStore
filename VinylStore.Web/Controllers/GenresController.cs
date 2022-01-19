@@ -1,7 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VinylStore.Application;
-using VinylStore.DataObjects;
 using VinylStore.Web.ViewModels;
 
 namespace VinylStore.Web.Controllers;
@@ -23,32 +22,50 @@ public class GenresController : ControllerBase
     }
     
     [HttpGet("{id}")]
-    public Genre GetById(Guid id)
+    public GenreViewModel GetById(Guid id)
     {
-        return _genreService.GetById(id);
+        var genre = _genreService.GetById(id);
+
+        var model = _mapper.Map<GenreViewModel>(genre);
+        
+        return model;
     }
     
     [HttpGet]
-    public IEnumerable<Genre> GetAll()
+    public IEnumerable<GenreViewModel> GetAll()
     {
-        return _genreService.GetAll();
+        var genres = _genreService.GetAll();
+
+        var models = genres.Select(genre => _mapper.Map<GenreViewModel>(genre));
+        
+        return models;
     }
     
     [HttpPost]
-    public void Create(CreateGenre genre)
+    public IActionResult Create(GenreViewModel model)
     {
-        _genreService.CreateGenre(_mapper.Map<Genre>(genre));
+        var genre = _mapper.Map<DataObjects.Genre>(model);
+        
+        _genreService.CreateGenre(genre);
+
+        return Ok();
     }
     
     [HttpPut]
-    public void Update(Genre genre)
+    public IActionResult Update(GenreViewModel model)
     {
+        var genre = _mapper.Map<DataObjects.Genre>(model);
+
         _genreService.UpdateGenre(genre);
+        
+        return Ok();
     }
     
     [HttpDelete]
-    public void Delete(Guid id)
+    public IActionResult Delete(Guid id)
     {
         _genreService.DeleteGenre(id);
+
+        return Ok();
     }
 }
