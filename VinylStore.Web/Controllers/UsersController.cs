@@ -21,7 +21,8 @@ public class UsersController : ControllerBase
         _mapper = mapper;
     }
         
-    [HttpGet("{id}")]
+    [HttpGet]
+    [Route("Get/{id}")]
     public UserViewModel GetById(Guid id)
     {
         var user = _userService.GetById(id);
@@ -32,6 +33,7 @@ public class UsersController : ControllerBase
     }
     
     [HttpGet]
+    [Route("GetAll")]
     public IEnumerable<UserViewModel> GetAll()
     {
         var users = _userService.GetAll();
@@ -42,6 +44,7 @@ public class UsersController : ControllerBase
     }
     
     [HttpPut]
+    [Route("Update")]
     public IActionResult Update(UserViewModel model)
     {
         var user = _mapper.Map<DataObjects.User>(model);
@@ -52,6 +55,7 @@ public class UsersController : ControllerBase
     }
     
     [HttpDelete]
+    [Route("Delete")]
     public IActionResult Delete(Guid id)
     {
         _userService.DeleteUser(id);

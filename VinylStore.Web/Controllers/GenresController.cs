@@ -21,7 +21,8 @@ public class GenresController : ControllerBase
         _mapper = mapper;
     }
     
-    [HttpGet("{id}")]
+    [HttpGet]
+    [Route("Get/{id}")]
     public GenreViewModel GetById(Guid id)
     {
         var genre = _genreService.GetById(id);
@@ -32,6 +33,7 @@ public class GenresController : ControllerBase
     }
     
     [HttpGet]
+    [Route("GetAll")]
     public IEnumerable<GenreViewModel> GetAll()
     {
         var genres = _genreService.GetAll();
@@ -42,6 +44,7 @@ public class GenresController : ControllerBase
     }
     
     [HttpPost]
+    [Route("Create")]
     public IActionResult Create(GenreViewModel model)
     {
         var genre = _mapper.Map<DataObjects.Genre>(model);
@@ -52,6 +55,7 @@ public class GenresController : ControllerBase
     }
     
     [HttpPut]
+    [Route("Update")]
     public IActionResult Update(GenreViewModel model)
     {
         var genre = _mapper.Map<DataObjects.Genre>(model);
@@ -62,6 +66,7 @@ public class GenresController : ControllerBase
     }
     
     [HttpDelete]
+    [Route("Delete")]
     public IActionResult Delete(Guid id)
     {
         _genreService.DeleteGenre(id);
