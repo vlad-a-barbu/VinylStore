@@ -23,12 +23,14 @@ builder.Services.AddDbContext<VinylStoreContext>(options =>
     options.UseSqlServer(builder.Configuration["VinylStoreConnection"]));
 
 builder.Services.AddScoped<GenreService>();
+builder.Services.AddScoped<UserService>();
 
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
     builder.RegisterType<ServiceDependencies>();
     builder.RegisterType<UnitOfWork>();
     builder.RegisterType<GenreDomainService>();
+    builder.RegisterType<UserDomainService>();
     builder.RegisterType<DomainServices>();
 });
 
