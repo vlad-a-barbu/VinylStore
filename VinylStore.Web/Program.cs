@@ -24,6 +24,7 @@ builder.Services.AddDbContext<VinylStoreContext>(options =>
 
 builder.Services.AddScoped<GenreService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<UserAuthenticationService>();
 
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
