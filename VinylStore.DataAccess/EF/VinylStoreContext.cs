@@ -40,6 +40,18 @@ public class VinylStoreContext : DbContext
             .HasMany(p => p.Vinyls)
             .WithMany(v => v.Purchases);
 
+        modelBuilder.Entity<Purchase>(
+            e => e.Property(
+                p => p.Discount
+            ).HasColumnType("decimal(18,2)")
+        );
+        
+        modelBuilder.Entity<Vinyl>(
+            e => e.Property(
+                p => p.Price
+            ).HasColumnType("decimal(18,2)")
+        );
+        
         modelBuilder.Entity<User>()
             .HasMany(u => u.Purchases)
             .WithOne(p => p.User);
