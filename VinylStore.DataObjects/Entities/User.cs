@@ -1,8 +1,8 @@
-using VinylStore.DataAccess.EF.Models.Base;
+using VinylStore.DataAccess.EF.Models;
 
-namespace VinylStore.DataAccess.EF.Models;
+namespace VinylStore.DataObjects.Entities;
 
-public class User : IEntity
+public class User
 {
     public Guid Id { get; set; }
     public string FirstName { get; set; } = null!;
@@ -10,10 +10,6 @@ public class User : IEntity
     public string Email { get; set; } = null!;
     public string PasswordHash { get; set; } = null!;
     public string PasswordSalt { get; set; } = null!;
-
+    public Role Role { get; set; }
     public Guid AddressId { get; set; }
-
-    public virtual Role Role { get; set; }
-    public virtual Address Address { get; set; }
-    public virtual ICollection<Purchase>? Purchases { get; set; }
 }

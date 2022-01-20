@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using VinylStore.Application;
+using VinylStore.Application.Services;
+using VinylStore.DataObjects.BusinessModels;
 using VinylStore.Web.ViewModels;
 
 namespace VinylStore.Web.Controllers;
@@ -47,7 +48,7 @@ public class UsersController : ControllerBase
     [Route("Update")]
     public IActionResult Update(UserViewModel model)
     {
-        var user = _mapper.Map<DataObjects.User>(model);
+        var user = _mapper.Map<CompleteUser>(model);
 
         _userService.UpdateUser(user);
         

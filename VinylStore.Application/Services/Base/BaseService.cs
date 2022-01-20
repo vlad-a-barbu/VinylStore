@@ -2,7 +2,7 @@ using System.Transactions;
 using Autofac;
 using VinylStore.Domain;
 
-namespace VinylStore.Application.Base;
+namespace VinylStore.Application.Services.Base;
 
 public class BaseService
 {

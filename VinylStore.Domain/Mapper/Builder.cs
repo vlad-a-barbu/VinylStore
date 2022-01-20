@@ -4,8 +4,8 @@ namespace VinylStore.Domain.Mapper;
 
 public class Builder
 {
-    public static Func<TSource, TDestination> For<TSource, TDestination>(TDestination? existingEntity = null)
-        where TDestination : class
+    public static Func<TSource, TDestination> For<TSource, TDestination>
+        (TDestination? existingEntity = null, params string[] ignoredProperties) where TDestination : class
     {
         var source = Expression.Parameter(typeof(TSource));
         var destination = Expression.Variable(typeof(TDestination));
@@ -26,6 +26,7 @@ public class Builder
         var assignationDescriptors = 
             source.Type
                 .GetProperties()
+                .Where(p => !ignoredProperties.Contains(p.Name))
                 .Select(prop =>
                     AssignationDescriptor(
                         source, destination, prop.Name
@@ -44,6 +45,20 @@ public class Builder
         ).Compile();
     }
     
+    public static TDestination Aggregate<TSource1, TSource2, TDestination> (TSource1 source1, TSource2 source2) 
+        where TDestination : class
+    {
+        var tempResult =
+            For<TSource1, TDestination>()
+                .Invoke(source1);
+
+        var result =
+            For<TSource2, TDestination>(tempResult)
+                .Invoke(source2);
+
+        return result;
+    }
+    
     private static Expression AssignationDescriptor(
         Expression source,
         Expression destination,
@@ -55,11 +70,12 @@ public class Builder
     
     private static void Assign<TSource, TDestination>(TSource source, TDestination destination, string property)
     {
-        var sourceValue = typeof(TSource).GetProperty(property)!.GetValue(source)!;
+        var sourceValue = typeof(TSource).GetProperty(property)!.GetValue(source);
 
         var destinationProperty = typeof(TDestination).GetProperty(property);
 
-        if (destinationProperty is not null &&
+        if (sourceValue is not null &&
+            destinationProperty is not null &&
             sourceValue.GetType() == destinationProperty.PropertyType)
         {
             typeof(TDestination).GetProperty(property)!.SetValue(destination, sourceValue);

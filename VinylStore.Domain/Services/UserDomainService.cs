@@ -1,6 +1,7 @@
 using VinylStore.DataAccess;
-using VinylStore.DataObjects;
+using VinylStore.DataObjects.Entities;
 using VinylStore.Domain.Base;
+using VinylStore.Domain.Mapper;
 using EFModels = VinylStore.DataAccess.EF.Models;
 
 namespace VinylStore.Domain.Services;
@@ -19,7 +20,7 @@ public class UserDomainService : IDomainService<User>
         var user = _uow.Users.Get(id);
 
         return user is null ? null :
-            Mapper.Builder
+            Builder
                 .For<EFModels.User, User>()
                 .Invoke(user);
     }
@@ -30,7 +31,7 @@ public class UserDomainService : IDomainService<User>
             .GetAll()
             .ToList()
             .Select(user => 
-                Mapper.Builder
+                Builder
                     .For<EFModels.User, User>()
                     .Invoke(user)
             );
@@ -38,15 +39,16 @@ public class UserDomainService : IDomainService<User>
         return filter is null ? users : users.Where(filter);
     }
     
-    public void Create(User user)
+    public Guid Create(User user)
     {
-        _uow.Users.Insert(
-        Mapper.Builder
-                .For<User, EFModels.User>()
-                .Invoke(user)
-        );
+        var entity = Builder
+            .For<User, EFModels.User>()
+            .Invoke(user);
         
+        _uow.Users.Insert(entity);
         _uow.SaveChanges();
+
+        return entity.Id;
     }
 
     public void Update(User user)
@@ -55,7 +57,7 @@ public class UserDomainService : IDomainService<User>
                      ?? throw new ArgumentException($"User {user.Id} not found", nameof(user));
         
         _uow.Users.Update(
-            Mapper.Builder
+            Builder
                 .For<User, EFModels.User>(entity)
                 .Invoke(user)
         );
