@@ -169,12 +169,12 @@ namespace VinylStore.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AddressId")
+                    b.Property<Guid>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -198,8 +198,10 @@ namespace VinylStore.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId")
-                        .IsUnique()
-                        .HasFilter("[AddressId] IS NOT NULL");
+                        .IsUnique();
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -287,7 +289,9 @@ namespace VinylStore.DataAccess.Migrations
                 {
                     b.HasOne("VinylStore.DataAccess.EF.Models.Address", "Address")
                         .WithOne("User")
-                        .HasForeignKey("VinylStore.DataAccess.EF.Models.User", "AddressId");
+                        .HasForeignKey("VinylStore.DataAccess.EF.Models.User", "AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Address");
                 });

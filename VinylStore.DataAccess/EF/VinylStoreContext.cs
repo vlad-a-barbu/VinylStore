@@ -60,5 +60,9 @@ public class VinylStoreContext : DbContext
             .HasOne(u => u.Address)
             .WithOne(a => a.User)
             .HasForeignKey<User>(u => u.AddressId);
+        
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Email)
+            .IsUnique();
     }
 }
