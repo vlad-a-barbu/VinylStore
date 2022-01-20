@@ -6,7 +6,7 @@ public interface IDomainService<T>
 
     IEnumerable<T> GetAll(Func<T, bool>? filter = null);
 
-    void Create(T entity);
+    Guid Create(T entity);
 
     void Update(T entity);
 

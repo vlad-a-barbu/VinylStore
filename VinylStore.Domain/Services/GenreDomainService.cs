@@ -1,5 +1,6 @@
 using VinylStore.DataAccess;
 using VinylStore.DataObjects;
+using VinylStore.DataObjects.Entities;
 using VinylStore.Domain.Base;
 using EFModels = VinylStore.DataAccess.EF.Models;
 
@@ -38,15 +39,16 @@ public class GenreDomainService : IDomainService<Genre>
         return filter is null ? genres : genres.Where(filter);
     }
     
-    public void Create(Genre genre)
+    public Guid Create(Genre genre)
     {
-        _uow.Genres.Insert(
-            Mapper.Builder
-                .For<Genre, EFModels.Genre>()
-                .Invoke(genre)
-        );
+        var entity = Mapper.Builder
+            .For<Genre, EFModels.Genre>()
+            .Invoke(genre);
         
+        _uow.Genres.Insert(entity);
         _uow.SaveChanges();
+
+        return entity.Id;
     }
 
     public void Update(Genre genre)

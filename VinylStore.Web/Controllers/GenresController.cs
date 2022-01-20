@@ -1,12 +1,17 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using VinylStore.Application;
+using VinylStore.Application.Services;
+using VinylStore.DataAccess.EF.Models;
+using VinylStore.DataObjects;
+using VinylStore.Web.Validation.Attributes;
 using VinylStore.Web.ViewModels;
+using Genre = VinylStore.DataObjects.Entities.Genre;
 
 namespace VinylStore.Web.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorization(Role.Admin)]
 public class GenresController : ControllerBase
 {
     private readonly GenreService _genreService;
@@ -47,7 +52,7 @@ public class GenresController : ControllerBase
     [Route("Create")]
     public IActionResult Create(GenreViewModel model)
     {
-        var genre = _mapper.Map<DataObjects.Genre>(model);
+        var genre = _mapper.Map<Genre>(model);
         
         _genreService.CreateGenre(genre);
 
@@ -58,7 +63,7 @@ public class GenresController : ControllerBase
     [Route("Update")]
     public IActionResult Update(GenreViewModel model)
     {
-        var genre = _mapper.Map<DataObjects.Genre>(model);
+        var genre = _mapper.Map<Genre>(model);
 
         _genreService.UpdateGenre(genre);
         

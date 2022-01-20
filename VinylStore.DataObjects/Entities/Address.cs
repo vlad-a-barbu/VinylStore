@@ -1,4 +1,4 @@
-namespace VinylStore.DataObjects;
+namespace VinylStore.DataObjects.Entities;
 
 public class Address
 {

@@ -1,7 +1,7 @@
-using VinylStore.Application.Base;
-using VinylStore.DataObjects;
+using VinylStore.Application.Services.Base;
+using VinylStore.DataObjects.Entities;
 
-namespace VinylStore.Application;
+namespace VinylStore.Application.Services;
 
 public class GenreService : BaseService
 {
