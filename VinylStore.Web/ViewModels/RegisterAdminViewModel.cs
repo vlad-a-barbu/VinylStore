@@ -2,16 +2,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace VinylStore.Web.ViewModels;
 
-public class RegisterViewModel
+public class RegisterAdminViewModel
 {
-    public Guid Id { get; set; }
-    
     [Required]
     public string FirstName { get; set; } = null!;
     
     [Required]
     public string LastName { get; set; } = null!;
     
+    [Required]
     [EmailAddress]
     public string Email { get; set; } = null!; 
     
@@ -22,6 +21,7 @@ public class RegisterViewModel
     
     [Required]
     [DataType(DataType.Password)]
+    [Compare(nameof(Password), ErrorMessage = "Passwords do not match")]
     public string ConfirmPassword { get; set; } = null!;
     
     [Required]

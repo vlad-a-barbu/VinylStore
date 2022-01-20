@@ -1,7 +1,6 @@
 using Autofac;
-using VinylStore.Domain;
 
-namespace VinylStore.Application;
+namespace VinylStore.Application.Services;
 
 public class ServiceDependencies
 {

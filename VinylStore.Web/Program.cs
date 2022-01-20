@@ -1,11 +1,16 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using VinylStore.Application;
+using VinylStore.Application.Services;
 using VinylStore.DataAccess;
 using VinylStore.DataAccess.EF;
+using VinylStore.DataAccess.EF.Models;
+using VinylStore.DataAccess.Repositories;
+using VinylStore.DataObjects.AuthenticationModels;
 using VinylStore.Domain;
 using VinylStore.Domain.Services;
+using VinylStore.Web.Authorization;
+using VinylStore.Web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,9 +27,13 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<VinylStoreContext>(options => 
     options.UseSqlServer(builder.Configuration["VinylStoreConnection"]));
 
+builder.Services.AddTransient<IGenericRepository<User>, GenericRepository<User>>();
 builder.Services.AddScoped<GenreService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<UserAuthenticationService>();
+builder.Services.AddScoped<JwtUtils>();
+
+builder.Services.Configure<JwtSecret>(builder.Configuration.GetSection("JwtSecret"));
 
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
@@ -32,6 +41,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
     builder.RegisterType<UnitOfWork>();
     builder.RegisterType<GenreDomainService>();
     builder.RegisterType<UserDomainService>();
+    builder.RegisterType<AddressDomainService>();
     builder.RegisterType<DomainServices>();
 });
 
@@ -46,7 +56,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
+
+app.UseJwtAuthorization();
 
 app.MapControllers();
 

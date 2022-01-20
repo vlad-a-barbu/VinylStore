@@ -1,9 +1,9 @@
-using System.Net;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using VinylStore.Application;
-using VinylStore.Web.Validation;
+using VinylStore.Application.Services;
+using VinylStore.DataObjects.AuthenticationModels;
+using VinylStore.Web.Authorization;
+using VinylStore.Web.Validation.Attributes;
 using VinylStore.Web.ViewModels;
 
 namespace VinylStore.Web.Controllers;
@@ -14,22 +14,50 @@ public class AuthenticationController : ControllerBase
 {
     private readonly UserAuthenticationService _authenticationService;
     private readonly IMapper _mapper;
-
+    private readonly JwtUtils _utils;
+    
     public AuthenticationController(
         UserAuthenticationService authenticationService,
-        IMapper mapper
+        IMapper mapper,
+        JwtUtils utils
     )
     {
         _authenticationService = authenticationService;
         _mapper = mapper;
+        _utils = utils;
     }
 
-    [HttpPost("Register")]
+    [HttpPost("RegisterClient")]
     [ValidateModel]
-    public IActionResult Register(RegisterViewModel model)
+    public IActionResult RegisterClient(RegisterClientViewModel model)
     {
+        var registerUser = _mapper.Map<RegisterUser>(model);
         
+        _authenticationService.RegisterClient(registerUser);
         
         return Ok();
+    }
+    
+    [HttpPost("RegisterAdmin")]
+    [ValidateModel]
+    public IActionResult RegisterAdmin(RegisterAdminViewModel model)
+    {
+        var registerUser = _mapper.Map<RegisterUser>(model);
+        
+        _authenticationService.RegisterAdmin(registerUser);
+        
+        return Ok();
+    }
+    
+    [HttpPost("Authenticate")]
+    [ValidateModel]
+    public IActionResult Authenticate(LoginViewModel model)
+    {
+        var loginUser = _mapper.Map<LoginUser>(model);
+
+        var authenticatedUser = _authenticationService.Authenticate(loginUser);
+        
+        return authenticatedUser is not null ? 
+            Ok(_utils.GenerateToken(authenticatedUser)) : BadRequest();
     }
 }
