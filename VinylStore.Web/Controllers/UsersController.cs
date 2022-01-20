@@ -1,7 +1,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VinylStore.Application.Services;
+using VinylStore.DataAccess.EF.Models;
 using VinylStore.DataObjects.BusinessModels;
+using VinylStore.Web.Validation.Attributes;
 using VinylStore.Web.ViewModels;
 
 namespace VinylStore.Web.Controllers;
@@ -24,6 +26,7 @@ public class UsersController : ControllerBase
         
     [HttpGet]
     [Route("Get/{id}")]
+    [Authorization(Role.Client, Role.Admin)]
     public UserViewModel GetById(Guid id)
     {
         var user = _userService.GetById(id);
@@ -35,6 +38,7 @@ public class UsersController : ControllerBase
     
     [HttpGet]
     [Route("GetAll")]
+    [Authorization(Role.Admin)]
     public IEnumerable<UserViewModel> GetAll()
     {
         var users = _userService.GetAll();
@@ -46,6 +50,7 @@ public class UsersController : ControllerBase
     
     [HttpPut]
     [Route("Update")]
+    [Authorization(Role.Admin)]
     public IActionResult Update(UserViewModel model)
     {
         var user = _mapper.Map<CompleteUser>(model);
@@ -57,6 +62,7 @@ public class UsersController : ControllerBase
     
     [HttpDelete]
     [Route("Delete")]
+    [Authorization(Role.Admin)]
     public IActionResult Delete(Guid id)
     {
         _userService.DeleteUser(id);

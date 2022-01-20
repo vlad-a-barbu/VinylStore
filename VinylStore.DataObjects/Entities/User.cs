@@ -1,8 +1,9 @@
 using VinylStore.DataAccess.EF.Models;
+using VinylStore.DataAccess.EF.Models.Base;
 
 namespace VinylStore.DataObjects.Entities;
 
-public class User
+public class User : IEntity
 {
     public Guid Id { get; set; }
     public string FirstName { get; set; } = null!;

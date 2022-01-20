@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VinylStore.Application.Services;
+using VinylStore.DataAccess.EF.Models;
 using VinylStore.DataObjects.AuthenticationModels;
 using VinylStore.Web.Authorization;
 using VinylStore.Web.Validation.Attributes;

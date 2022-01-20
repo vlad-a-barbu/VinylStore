@@ -1,6 +1,8 @@
+using VinylStore.DataAccess.EF.Models.Base;
+
 namespace VinylStore.DataObjects.Entities;
 
-public class Address
+public class Address : IEntity
 {
     public Guid Id { get; set; }
     public string Country { get; set; } = null!;

@@ -4,34 +4,34 @@ using VinylStore.Application.Services;
 using VinylStore.DataAccess.EF.Models;
 using VinylStore.Web.Validation.Attributes;
 using VinylStore.Web.ViewModels;
-using Genre = VinylStore.DataObjects.Entities.Genre;
+using Artist = VinylStore.DataObjects.Entities.Artist;
 
 namespace VinylStore.Web.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class GenresController : ControllerBase
+public class ArtistsController : ControllerBase
 {
-    private readonly GenreService _genreService;
+    private readonly ArtistService _artistService;
     private readonly IMapper _mapper;
 
-    public GenresController(
-        GenreService genreService,
+    public ArtistsController(
+        ArtistService artistService,
         IMapper mapper
     )
     {
-        _genreService = genreService;
+        _artistService = artistService;
         _mapper = mapper;
     }
     
     [HttpGet]
     [Route("Get/{id}")]
     [Authorization(Role.Admin, Role.Client)]
-    public GenreViewModel GetById(Guid id)
+    public ArtistViewModel GetById(Guid id)
     {
-        var genre = _genreService.GetById(id);
+        var artist = _artistService.GetById(id);
 
-        var model = _mapper.Map<GenreViewModel>(genre);
+        var model = _mapper.Map<ArtistViewModel>(artist);
         
         return model;
     }
@@ -39,11 +39,11 @@ public class GenresController : ControllerBase
     [HttpGet]
     [Route("GetAll")]
     [Authorization(Role.Admin, Role.Client)]
-    public IEnumerable<GenreViewModel> GetAll()
+    public IEnumerable<ArtistViewModel> GetAll()
     {
-        var genres = _genreService.GetAll();
+        var artists = _artistService.GetAll();
 
-        var models = genres.Select(genre => _mapper.Map<GenreViewModel>(genre));
+        var models = artists.Select(artist => _mapper.Map<ArtistViewModel>(artist));
         
         return models;
     }
@@ -51,11 +51,11 @@ public class GenresController : ControllerBase
     [HttpPost]
     [Route("Create")]
     [Authorization(Role.Admin)]
-    public IActionResult Create(GenreViewModel model)
+    public IActionResult Create(ArtistViewModel model)
     {
-        var genre = _mapper.Map<Genre>(model);
+        var artist = _mapper.Map<Artist>(model);
         
-        _genreService.CreateGenre(genre);
+        _artistService.CreateArtist(artist);
 
         return Ok();
     }
@@ -63,11 +63,11 @@ public class GenresController : ControllerBase
     [HttpPut]
     [Route("Update")]
     [Authorization(Role.Admin)]
-    public IActionResult Update(GenreViewModel model)
+    public IActionResult Update(ArtistViewModel model)
     {
-        var genre = _mapper.Map<Genre>(model);
+        var artist = _mapper.Map<Artist>(model);
 
-        _genreService.UpdateGenre(genre);
+        _artistService.UpdateArtist(artist);
         
         return Ok();
     }
@@ -77,7 +77,7 @@ public class GenresController : ControllerBase
     [Authorization(Role.Admin)]
     public IActionResult Delete(Guid id)
     {
-        _genreService.DeleteGenre(id);
+        _artistService.DeleteArtist(id);
 
         return Ok();
     }

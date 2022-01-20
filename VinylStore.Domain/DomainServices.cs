@@ -7,12 +7,14 @@ public class DomainServices
     public DomainServices(
         Lazy<GenreDomainService> genreDomainService,
         Lazy<UserDomainService> userDomainService,
-        Lazy<AddressDomainService> addressDomainService
+        Lazy<AddressDomainService> addressDomainService,
+        Lazy<ArtistDomainService> artistDomainService
     )
     {
         _genreDomainService = genreDomainService;
         _userDomainService = userDomainService;
         _addressDomainService = addressDomainService;
+        _artistDomainService = artistDomainService;
     }
 
     private readonly Lazy<GenreDomainService> _genreDomainService;
@@ -23,4 +25,7 @@ public class DomainServices
 
     private readonly Lazy<AddressDomainService> _addressDomainService;
     public AddressDomainService Address => _addressDomainService.Value;
+
+    private readonly Lazy<ArtistDomainService> _artistDomainService;
+    public ArtistDomainService Artist => _artistDomainService.Value;
 }

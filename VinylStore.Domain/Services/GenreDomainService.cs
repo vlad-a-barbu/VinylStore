@@ -1,7 +1,7 @@
 using VinylStore.DataAccess;
-using VinylStore.DataObjects;
 using VinylStore.DataObjects.Entities;
 using VinylStore.Domain.Base;
+using VinylStore.Domain.Mapper;
 using EFModels = VinylStore.DataAccess.EF.Models;
 
 namespace VinylStore.Domain.Services;
@@ -20,7 +20,7 @@ public class GenreDomainService : IDomainService<Genre>
         var genre = _uow.Genres.Get(id);
 
         return genre is null ? null :
-            Mapper.Builder
+            Builder
                 .For<EFModels.Genre, Genre>()
                 .Invoke(genre);
     }
@@ -31,7 +31,7 @@ public class GenreDomainService : IDomainService<Genre>
             .GetAll()
             .ToList()
             .Select(genre => 
-                Mapper.Builder
+                Builder
                     .For<EFModels.Genre, Genre>()
                     .Invoke(genre)
             );
@@ -41,7 +41,7 @@ public class GenreDomainService : IDomainService<Genre>
     
     public Guid Create(Genre genre)
     {
-        var entity = Mapper.Builder
+        var entity = Builder
             .For<Genre, EFModels.Genre>()
             .Invoke(genre);
         
@@ -57,7 +57,7 @@ public class GenreDomainService : IDomainService<Genre>
             ?? throw new ArgumentException($"Genre {genre.Id} not found", nameof(genre));
         
         _uow.Genres.Update(
-            Mapper.Builder
+            Builder
                 .For<Genre, EFModels.Genre>(entity)
                 .Invoke(genre)
         );

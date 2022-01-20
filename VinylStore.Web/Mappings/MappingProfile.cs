@@ -11,6 +11,9 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
+        CreateMap<ArtistViewModel, Artist>();
+        CreateMap<Artist, ArtistViewModel>();
+
         CreateMap<GenreViewModel, Genre>();
         CreateMap<Genre, GenreViewModel>();
 
