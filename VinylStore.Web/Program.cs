@@ -58,6 +58,7 @@ builder.Services.AddDbContext<VinylStoreContext>(options =>
 builder.Services.AddScoped<GenreService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ArtistService>();
+builder.Services.AddScoped<AlbumService>();
 builder.Services.AddScoped<UserAuthenticationService>();
 builder.Services.AddScoped<JwtUtils>();
 builder.Services.AddTransient<IGenericRepository<EFModels.User>, GenericRepository<EFModels.User>>();
@@ -72,6 +73,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
     builder.RegisterType<UserDomainService>();
     builder.RegisterType<AddressDomainService>();
     builder.RegisterType<ArtistDomainService>();
+    builder.RegisterType<AlbumDomainService>();
     builder.RegisterType<DomainServices>();
 });
 

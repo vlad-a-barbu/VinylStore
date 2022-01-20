@@ -64,5 +64,9 @@ public class VinylStoreContext : DbContext
         modelBuilder.Entity<User>()
             .HasIndex(u => u.Email)
             .IsUnique();
+        
+        modelBuilder.Entity<Artist>()
+            .HasIndex(u => u.Name)
+            .IsUnique();
     }
 }

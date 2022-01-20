@@ -14,3 +14,4 @@ public class User : IEntity
     public Role Role { get; set; }
     public Guid AddressId { get; set; }
 }
+
