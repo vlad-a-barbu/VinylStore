@@ -64,6 +64,7 @@ function AdminModal(props) {
             else {
                 response.json().then(id => {
                     data["id"] = id;
+                    data["role"] = 1;
                     console.log(data);
                     push(data);
                     setShow(false);
@@ -77,7 +78,7 @@ function AdminModal(props) {
 
         <>
 
-            < Button variant="primary" onClick={handleShow}>
+            < Button style = {{margin: '5px'}} variant="primary" onClick={handleShow}>
                 Create Admin
             </ Button >
 

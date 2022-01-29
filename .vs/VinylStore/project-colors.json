@@ -35,7 +35,12 @@
       "ProjectGuid": "9c8387e0-9f2d-49ad-989e-6a7214645c6e",
       "DisplayName": "VinylStore.Application",
       "ColorIndex": 5
+    },
+    "04bf6b38-23dd-4222-8f49-fe8488ae5a52": {
+      "ProjectGuid": "04bf6b38-23dd-4222-8f49-fe8488ae5a52",
+      "DisplayName": "VinylStore.DataAccess",
+      "ColorIndex": 6
     }
   },
-  "NextColorIndex": 6
+  "NextColorIndex": 7
 }

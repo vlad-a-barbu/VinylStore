@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import ClientModal from './ClientModal';
 import AdminModal from './AdminModal';
-import EditGenreModal from './EditGenreModal';
+import EditUserModal from './EditUserModal';
 
 export class Users extends Component {
     static displayName = Users.name;
@@ -87,7 +87,7 @@ export class Users extends Component {
                                 <td>{model.addressLine2}</td>
                                 <td>
 
-                                    <EditGenreModal handler={this.updateModelHandler} model={model} />
+                                    <EditUserModal handler={this.updateModelHandler} model={model} />
 
                                     <button onClick={() => this.handleDelete(model.id)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
@@ -129,8 +129,8 @@ export class Users extends Component {
         return (
             <div>
                 <h1 id="tabelLabel" >Users </h1>
-                <ClientModal handler={this.addModelHandler} />
-                <AdminModal handler={this.addModelHandler} />
+                <ClientModal style={{margin: "50px"}} handler={this.addModelHandler} />
+                <AdminModal style={{margin: "50px"}} handler={this.addModelHandler} />
                 {contents}
             </div>
         );

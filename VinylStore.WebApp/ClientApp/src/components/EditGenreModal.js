@@ -55,10 +55,7 @@ function EditGenreModal(props) {
                     <Modal.Title>Genre Designer</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-
-                    <label htmlFor="id"><b>Id</b></label><br />
-                    <input type="text" placeholder="Genre id" name="id" value={genre.id} readOnly /><br />
-
+                    
                     <label htmlFor="name"><b>Name</b></label><br />
                     <input type="text" placeholder="Genre name" name="name" defaultValue={genre.name} onChange={handleNameChange} /><br />
 

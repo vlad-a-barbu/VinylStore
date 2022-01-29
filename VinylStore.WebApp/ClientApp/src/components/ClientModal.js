@@ -67,6 +67,7 @@ method: "POST",
               {
                   response.json().then(id => {
                       data["id"] = id;
+                      data["role"] = 0;
                       console.log(data);
                       push(data);
                       setShow(false);
@@ -80,7 +81,7 @@ return (
 
     <>
 
-        < Button variant = "primary" onClick ={ handleShow}>
+        < Button style = {{margin: '5px'}} variant = "primary" onClick ={ handleShow}>
                  Create Client
              </ Button >
  
