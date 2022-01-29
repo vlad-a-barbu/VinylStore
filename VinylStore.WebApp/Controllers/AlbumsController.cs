@@ -1,22 +1,19 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VinylStore.Application.Services;
-using VinylStore.DataAccess.EF.Models;
 using VinylStore.DataObjects.BusinessModels;
-using VinylStore.Web.Validation.Attributes;
 using VinylStore.Web.ViewModels;
-using Album = VinylStore.DataObjects.Entities.Album;
 
 namespace VinylStore.Web.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class AlbumController : ControllerBase
+public class AlbumsController : ControllerBase
 {
     private readonly AlbumService _albumService;
     private readonly IMapper _mapper;
 
-    public AlbumController(
+    public AlbumsController(
         AlbumService albumService,
         IMapper mapper
     )
@@ -27,7 +24,6 @@ public class AlbumController : ControllerBase
     
     [HttpGet]
     [Route("Get/{id}")]
-    [Authorization(Role.Admin, Role.Client)]
     public AlbumViewModel GetById(Guid id)
     {
         var album = _albumService.GetById(id);
@@ -39,7 +35,6 @@ public class AlbumController : ControllerBase
     
     [HttpGet]
     [Route("GetAll")]
-    [Authorization(Role.Admin)]
     public IEnumerable<AlbumViewModel> GetAll()
     {
         var albums = _albumService.GetAll();
@@ -51,7 +46,6 @@ public class AlbumController : ControllerBase
     
     [HttpPost]
     [Route("Create")]
-    [Authorization(Role.Admin)]
     public IActionResult Create(AlbumViewModel model)
     {
         var album = _mapper.Map<CompleteAlbum>(model);
@@ -63,7 +57,6 @@ public class AlbumController : ControllerBase
     
     [HttpPut]
     [Route("Update")]
-    [Authorization(Role.Admin)]
     public IActionResult Update(AlbumViewModel model)
     {
         var album = _mapper.Map<CompleteAlbum>(model);
@@ -75,7 +68,6 @@ public class AlbumController : ControllerBase
     
     [HttpDelete]
     [Route("Delete")]
-    [Authorization(Role.Admin)]
     public IActionResult Delete(Guid id)
     {
         _albumService.DeleteAlbum(id);

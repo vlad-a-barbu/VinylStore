@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "a478580a-7c88-488b-80d0-1f0fc99a414b": {
+      "ProjectGuid": "a478580a-7c88-488b-80d0-1f0fc99a414b",
+      "DisplayName": "VinylStore.Web",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "88883dc7-c616-4dcb-9bda-3ee424e069fe": {
+      "ProjectGuid": "88883dc7-c616-4dcb-9bda-3ee424e069fe",
+      "DisplayName": "VinylStore.Domain",
+      "ColorIndex": 1
+    },
+    "c61c2b1c-b4b0-4636-99c1-235d2e037e06": {
+      "ProjectGuid": "c61c2b1c-b4b0-4636-99c1-235d2e037e06",
+      "DisplayName": "VinylStore.WebApp",
+      "ColorIndex": 2
+    },
+    "3bcb09f3-0fa6-4576-86de-fe33bfbf4d70": {
+      "ProjectGuid": "3bcb09f3-0fa6-4576-86de-fe33bfbf4d70",
+      "DisplayName": "VinylStore.Web2",
+      "ColorIndex": 3
+    }
+  },
+  "NextColorIndex": 4
+}

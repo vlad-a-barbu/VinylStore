@@ -1,14 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinylStore.Application", "VinylStore.Application\VinylStore.Application.csproj", "{9C8387E0-9F2D-49AD-989E-6A7214645C6E}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VinylStore.Application", "VinylStore.Application\VinylStore.Application.csproj", "{9C8387E0-9F2D-49AD-989E-6A7214645C6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinylStore.Domain", "VinylStore.Domain\VinylStore.Domain.csproj", "{88883DC7-C616-4DCB-9BDA-3EE424E069FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VinylStore.Domain", "VinylStore.Domain\VinylStore.Domain.csproj", "{88883DC7-C616-4DCB-9BDA-3EE424E069FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinylStore.DataAccess", "VinylStore.DataAccess\VinylStore.DataAccess.csproj", "{04BF6B38-23DD-4222-8F49-FE8488AE5A52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VinylStore.DataAccess", "VinylStore.DataAccess\VinylStore.DataAccess.csproj", "{04BF6B38-23DD-4222-8F49-FE8488AE5A52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinylStore.Web", "VinylStore.Web\VinylStore.Web.csproj", "{A478580A-7C88-488B-80D0-1F0FC99A414B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VinylStore.Web_DEPRECATED", "VinylStore.Web\VinylStore.Web_DEPRECATED.csproj", "{A478580A-7C88-488B-80D0-1F0FC99A414B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinylStore.DataObjects", "VinylStore.DataObjects\VinylStore.DataObjects.csproj", "{C0D0ECA9-663C-4E29-BEBD-9F9D13FD2F54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VinylStore.DataObjects", "VinylStore.DataObjects\VinylStore.DataObjects.csproj", "{C0D0ECA9-663C-4E29-BEBD-9F9D13FD2F54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinylStore.WebApp", "VinylStore.WebApp\VinylStore.WebApp.csproj", "{1FF185F0-3314-4825-8839-F1622B2FE13B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +41,15 @@ Global
 		{C0D0ECA9-663C-4E29-BEBD-9F9D13FD2F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0D0ECA9-663C-4E29-BEBD-9F9D13FD2F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0D0ECA9-663C-4E29-BEBD-9F9D13FD2F54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FF185F0-3314-4825-8839-F1622B2FE13B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF185F0-3314-4825-8839-F1622B2FE13B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF185F0-3314-4825-8839-F1622B2FE13B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF185F0-3314-4825-8839-F1622B2FE13B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF7C957F-87B9-4CA8-A2CF-4C76E87FCF92}
 	EndGlobalSection
 EndGlobal
