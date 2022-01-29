@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VinylStore.Domain", "VinylS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VinylStore.DataAccess", "VinylStore.DataAccess\VinylStore.DataAccess.csproj", "{04BF6B38-23DD-4222-8F49-FE8488AE5A52}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VinylStore.Web_DEPRECATED", "VinylStore.Web\VinylStore.Web_DEPRECATED.csproj", "{A478580A-7C88-488B-80D0-1F0FC99A414B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VinylStore.DataObjects", "VinylStore.DataObjects\VinylStore.DataObjects.csproj", "{C0D0ECA9-663C-4E29-BEBD-9F9D13FD2F54}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinylStore.WebApp", "VinylStore.WebApp\VinylStore.WebApp.csproj", "{1FF185F0-3314-4825-8839-F1622B2FE13B}"
@@ -33,10 +31,6 @@ Global
 		{04BF6B38-23DD-4222-8F49-FE8488AE5A52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04BF6B38-23DD-4222-8F49-FE8488AE5A52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04BF6B38-23DD-4222-8F49-FE8488AE5A52}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A478580A-7C88-488B-80D0-1F0FC99A414B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A478580A-7C88-488B-80D0-1F0FC99A414B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A478580A-7C88-488B-80D0-1F0FC99A414B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A478580A-7C88-488B-80D0-1F0FC99A414B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C0D0ECA9-663C-4E29-BEBD-9F9D13FD2F54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C0D0ECA9-663C-4E29-BEBD-9F9D13FD2F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0D0ECA9-663C-4E29-BEBD-9F9D13FD2F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
