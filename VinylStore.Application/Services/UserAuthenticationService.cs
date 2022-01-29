@@ -11,14 +11,14 @@ public class UserAuthenticationService : BaseService
 {
     public UserAuthenticationService(ServiceDependencies serviceDependencies) : base(serviceDependencies) { }
 
-    public void RegisterClient(RegisterUser registerUser)
+    public Guid RegisterClient(RegisterUser registerUser)
     {
-        Register(registerUser, Role.Client);
+        return Register(registerUser, Role.Client);
     }
     
-    public void RegisterAdmin(RegisterUser registerUser)
+    public Guid RegisterAdmin(RegisterUser registerUser)
     {
-        Register(registerUser, Role.Admin);
+        return Register(registerUser, Role.Admin);
     }
 
     public AuthenticatedUser? Authenticate(LoginUser loginUser)
@@ -38,9 +38,9 @@ public class UserAuthenticationService : BaseService
         });
     }
     
-    private void Register(RegisterUser registerUser, Role role)
+    private Guid Register(RegisterUser registerUser, Role role)
     {
-        ExecuteInTransaction(d =>
+        return ExecuteInTransaction(d =>
         {
             var address = Builder
                 .For<RegisterUser, Address>()
@@ -60,7 +60,7 @@ public class UserAuthenticationService : BaseService
             user.PasswordHash = password.Hash;
             user.PasswordSalt = password.Salt;
             
-            d.User.Create(user);
+            return d.User.Create(user);
         });
     }
 }

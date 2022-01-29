@@ -33,9 +33,9 @@ public class AuthenticationController : ControllerBase
     {
         var registerUser = _mapper.Map<RegisterUser>(model);
         
-        _authenticationService.RegisterClient(registerUser);
+        var id = _authenticationService.RegisterClient(registerUser);
         
-        return Ok();
+        return Ok(id);
     }
     
     [HttpPost("RegisterAdmin")]
@@ -44,9 +44,9 @@ public class AuthenticationController : ControllerBase
     {
         var registerUser = _mapper.Map<RegisterUser>(model);
         
-        _authenticationService.RegisterAdmin(registerUser);
+        var id = _authenticationService.RegisterAdmin(registerUser);
         
-        return Ok();
+        return Ok(id);
     }
     
     [HttpPost("Authenticate")]

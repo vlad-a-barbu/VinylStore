@@ -59,7 +59,7 @@ public class UsersController : ControllerBase
     
     [HttpDelete]
     [Route("Delete")]
-    public IActionResult Delete(Guid id)
+    public IActionResult Delete([FromBody] Guid id)
     {
         _userService.DeleteUser(id);
 
