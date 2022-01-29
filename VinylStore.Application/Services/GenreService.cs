@@ -18,9 +18,9 @@ public class GenreService : BaseService
         return ExecuteInTransaction(d => d.Genre.GetAll());
     }
 
-    public void CreateGenre(Genre genre)
+    public Guid CreateGenre(Genre genre)
     {
-        ExecuteInTransaction(d => d.Genre.Create(genre));
+        return ExecuteInTransaction(d => d.Genre.Create(genre));
     }
     
     public void UpdateGenre(Genre genre)

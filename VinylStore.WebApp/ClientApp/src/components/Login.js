@@ -29,10 +29,18 @@ export class Login extends Component {
                 },
                 body: JSON.stringify(loginViewModel)
             }
-        );
-
-        const token = await response.json();
-        console.log(token);
+        ).then(response => {
+            if (response.ok) {
+                response.json().then(token => {
+                    localStorage.setItem("jwt", token);
+                    alert("Login successful");
+                    this.setState({ email: '', password: '' });
+                });
+            }
+            else {
+                alert("Login failed");
+            }
+        });
     }
 
     handleChange(e) {

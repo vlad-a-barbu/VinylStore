@@ -48,17 +48,19 @@ public class GenresController : ControllerBase
     
     [HttpPost]
     [Route("Create")]
+    [Authorization(Role.Admin, Role.Client)]
     public IActionResult Create(GenreViewModel model)
     {
         var genre = _mapper.Map<Genre>(model);
         
-        _genreService.CreateGenre(genre);
+        var id = _genreService.CreateGenre(genre);
 
-        return Ok();
+        return Ok(id);
     }
     
     [HttpPut]
     [Route("Update")]
+    [Authorization(Role.Admin, Role.Client)]
     public IActionResult Update(GenreViewModel model)
     {
         var genre = _mapper.Map<Genre>(model);
@@ -70,7 +72,8 @@ public class GenresController : ControllerBase
     
     [HttpDelete]
     [Route("Delete")]
-    public IActionResult Delete(Guid id)
+    [Authorization(Role.Admin)]
+    public IActionResult Delete([FromBody] Guid id)
     {
         _genreService.DeleteGenre(id);
 
