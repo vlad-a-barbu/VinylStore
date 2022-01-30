@@ -18,9 +18,9 @@ public class ArtistService : BaseService
         return ExecuteInTransaction(d => d.Artist.GetAll());
     }
 
-    public void CreateArtist(Artist artist)
+    public Guid CreateArtist(Artist artist)
     {
-        ExecuteInTransaction(d => d.Artist.Create(artist));
+        return ExecuteInTransaction(d => d.Artist.Create(artist));
     }
     
     public void UpdateArtist(Artist artist)

@@ -72,7 +72,7 @@ public class GenresController : ControllerBase
     
     [HttpDelete]
     [Route("Delete")]
-    [Authorization(Role.Admin)]
+    [Authorization(Role.Admin, Role.Client)]
     public IActionResult Delete([FromBody] Guid id)
     {
         _genreService.DeleteGenre(id);

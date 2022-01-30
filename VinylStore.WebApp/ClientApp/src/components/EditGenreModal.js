@@ -14,7 +14,7 @@ function EditGenreModal(props) {
 
         console.log(genre);
 
-        const response = await fetch(
+        await fetch(
             'genres/update',
             {
                 method: "PUT",
@@ -25,11 +25,15 @@ function EditGenreModal(props) {
                 },
                 body: JSON.stringify(genre)
             }
-        );
-
-        await response.text().then(() => {
-            updateHandler(genre);
-            setShow(false);
+        ).then(response => {
+            if (response.status === 401){
+                alert("Unauthorized user");
+            } else if (response.ok) {
+                updateHandler(genre);
+                setShow(false);
+            } else {
+                alert("Something went wrong");
+            }
         });
     }
 

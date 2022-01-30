@@ -48,6 +48,7 @@ public class UsersController : ControllerBase
     
     [HttpPut]
     [Route("Update")]
+    [Authorization(Role.Admin, Role.Client)]
     public IActionResult Update(UserViewModel model)
     {
         var user = _mapper.Map<CompleteUser>(model);
@@ -59,6 +60,7 @@ public class UsersController : ControllerBase
     
     [HttpDelete]
     [Route("Delete")]
+    [Authorization(Role.Admin, Role.Client)]
     public IActionResult Delete([FromBody] Guid id)
     {
         _userService.DeleteUser(id);

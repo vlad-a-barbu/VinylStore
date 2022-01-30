@@ -22,7 +22,7 @@ export class Genres extends Component {
 
         console.log('deleting ' + id);
 
-        const response = await fetch(
+        await fetch(
             'genres/delete',
             {
                 method: "DELETE",
@@ -33,20 +33,21 @@ export class Genres extends Component {
                 },
                 body: JSON.stringify(id)
             }
-        );
-
-        await response.text().then(() => {
-
-            console.log(this.state);
-
-            this.setState(
-                {
-                    models: this.state.models.filter(m => m["id"] !== id),
-                    loading: false
-                }
-            );
-
-            console.log(this.state);
+        ).then(response => {
+            if (response.status === 401){
+                alert("Unauthorized user");
+            }
+            else if (response.ok) {
+                this.setState(
+                    {
+                        models: this.state.models.filter(m => m["id"] !== id),
+                        loading: false
+                    }
+                );
+            }
+            else{
+                alert("Something went wrong");
+            }
         });
     }
 
@@ -114,7 +115,7 @@ export class Genres extends Component {
 
         return ( 
             <div> 
-                <h1 id="tabelLabel" >Genres </h1>
+                <h1 id="tabelLabel" >Genres</h1>
                 <GenreModal handler={this.addModelHandler}/>
                 {contents}
             </div>

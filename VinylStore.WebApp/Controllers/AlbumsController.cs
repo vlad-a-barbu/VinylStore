@@ -1,7 +1,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VinylStore.Application.Services;
+using VinylStore.DataAccess.EF.Models;
 using VinylStore.DataObjects.BusinessModels;
+using VinylStore.Web.Validation.Attributes;
 using VinylStore.Web.ViewModels;
 
 namespace VinylStore.Web.Controllers;
@@ -46,17 +48,19 @@ public class AlbumsController : ControllerBase
     
     [HttpPost]
     [Route("Create")]
+    [Authorization(Role.Admin, Role.Client)]
     public IActionResult Create(AlbumViewModel model)
     {
         var album = _mapper.Map<CompleteAlbum>(model);
         
-        _albumService.CreateAlbum(album);
+        var id = _albumService.CreateAlbum(album);
 
-        return Ok();
+        return Ok(id);
     }
     
     [HttpPut]
     [Route("Update")]
+    [Authorization(Role.Admin, Role.Client)]
     public IActionResult Update(AlbumViewModel model)
     {
         var album = _mapper.Map<CompleteAlbum>(model);
@@ -68,7 +72,8 @@ public class AlbumsController : ControllerBase
     
     [HttpDelete]
     [Route("Delete")]
-    public IActionResult Delete(Guid id)
+    [Authorization(Role.Admin, Role.Client)]
+    public IActionResult Delete([FromBody] Guid id)
     {
         _albumService.DeleteAlbum(id);
 

@@ -12,9 +12,7 @@ function EditUserModal(props) {
 
     const handleSave = async () => {
 
-        console.log(user);
-
-        const response = await fetch(
+        await fetch(
             'users/update',
             {
                 method: "PUT",
@@ -25,11 +23,15 @@ function EditUserModal(props) {
                 },
                 body: JSON.stringify(user)
             }
-        );
-
-        await response.text().then(() => {
-            updateHandler(user);
-            setShow(false);
+        ).then(response => {
+            if (response.status === 401){
+                alert("Unauthorized user");
+            } else if (response.ok) {
+                updateHandler(user);
+                setShow(false);
+            } else {
+                alert("Something went wrong");
+            }
         });
     }
 

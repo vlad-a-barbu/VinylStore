@@ -49,9 +49,9 @@ public class AlbumService : BaseService
         });
     }
 
-    public void CreateAlbum(CompleteAlbum album)
+    public Guid CreateAlbum(CompleteAlbum album)
     {
-        ExecuteInTransaction(d =>
+        return ExecuteInTransaction(d =>
         {
             var albumEntity =
                 Builder.For<CompleteAlbum, Album>()
@@ -64,7 +64,7 @@ public class AlbumService : BaseService
 
             albumEntity.ArtistId = artist.Id;
 
-            d.Album.Create(albumEntity);
+            return d.Album.Create(albumEntity);
         });
     }
     

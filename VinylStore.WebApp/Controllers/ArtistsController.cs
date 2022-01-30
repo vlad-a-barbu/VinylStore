@@ -1,6 +1,8 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VinylStore.Application.Services;
+using VinylStore.DataAccess.EF.Models;
+using VinylStore.Web.Validation.Attributes;
 using VinylStore.Web.ViewModels;
 using Artist = VinylStore.DataObjects.Entities.Artist;
 
@@ -46,17 +48,19 @@ public class ArtistsController : ControllerBase
     
     [HttpPost]
     [Route("Create")]
+    [Authorization(Role.Admin, Role.Client)]
     public IActionResult Create(ArtistViewModel model)
     {
         var artist = _mapper.Map<Artist>(model);
         
-        _artistService.CreateArtist(artist);
+        var id = _artistService.CreateArtist(artist);
 
-        return Ok();
+        return Ok(id);
     }
     
     [HttpPut]
     [Route("Update")]
+    [Authorization(Role.Admin, Role.Client)]
     public IActionResult Update(ArtistViewModel model)
     {
         var artist = _mapper.Map<Artist>(model);
@@ -68,7 +72,8 @@ public class ArtistsController : ControllerBase
     
     [HttpDelete]
     [Route("Delete")]
-    public IActionResult Delete(Guid id)
+    [Authorization(Role.Admin, Role.Client)]
+    public IActionResult Delete([FromBody] Guid id)
     {
         _artistService.DeleteArtist(id);
 

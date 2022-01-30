@@ -23,7 +23,7 @@ export class Users extends Component {
 
         console.log('deleting ' + id);
 
-        const response = await fetch(
+        await fetch(
             'users/delete',
             {
                 method: "DELETE",
@@ -34,20 +34,21 @@ export class Users extends Component {
                 },
                 body: JSON.stringify(id)
             }
-        );
-
-        await response.text().then(() => {
-
-            console.log(this.state);
-
-            this.setState(
-                {
-                    models: this.state.models.filter(m => m["id"] !== id),
-                    loading: false
-                }
-            );
-
-            console.log(this.state);
+        ).then(response => {
+            if (response.status === 401){
+                alert("Unauthorized user");
+            }
+            else if (response.ok) {
+                this.setState(
+                    {
+                        models: this.state.models.filter(m => m["id"] !== id),
+                        loading: false
+                    }
+                );
+            }
+            else{
+                alert("Something went wrong");
+            }
         });
     }
 
