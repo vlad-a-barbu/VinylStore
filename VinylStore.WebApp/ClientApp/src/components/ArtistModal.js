@@ -1,7 +1,7 @@
-﻿import { React, useState } from 'react';
+import { React, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
-function GenreModal(props) {
+function ArtistModal(props) {
     const [show, setShow] = useState(false);
     const [name, setName] = useState("");
     const push = props.handler;
@@ -27,8 +27,8 @@ function GenreModal(props) {
 
         console.log(data);
 
-        const response = await fetch(
-            'genres/create',
+        await fetch(
+            'artists/create',
             {
                 method: "POST",
                 headers: {
@@ -65,12 +65,12 @@ function GenreModal(props) {
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Genre Designer</Modal.Title>
+                    <Modal.Title>Artist Designer</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
 
                     <label htmlFor="name"><b>Name</b></label><br />
-                    <input type="text" placeholder="Genre name" name="name" defaultValue={name} onChange={handleNameChange}/><br />
+                    <input type="text" placeholder="Artist name" name="name" defaultValue={name} onChange={handleNameChange}/><br />
                 
                 </Modal.Body>
                 <Modal.Footer>
@@ -86,4 +86,4 @@ function GenreModal(props) {
     );
 }
 
-export default GenreModal;
+export default ArtistModal;

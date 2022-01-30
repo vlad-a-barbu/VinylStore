@@ -1,17 +1,14 @@
-﻿import { React, useState } from 'react';
+import { React, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
-function GenreModal(props) {
+function AlbumModal(props) {
     const [show, setShow] = useState(false);
     const [name, setName] = useState("");
+	const [releaseDate, setReleaseDate] = useState("");
+    const [artist, setArtist] = useState("");
     const push = props.handler;
 
     const handleClose = () => {
-        const data = {
-            name
-        };
-
-        console.log(data);
         setShow(false);
     }
 
@@ -19,16 +16,26 @@ function GenreModal(props) {
         setName(event.target.value);
     }
 
+	const handleReleaseDateChange = (event) => {
+        setReleaseDate(event.target.value);
+    }
+
+	const handleArtistChange = (event) => {
+        setArtist(event.target.value);
+    }
+
     const handleSave = async () => {
 
         const data = {
-            name
+            name,
+			releaseDate,
+			artist
         };
 
         console.log(data);
 
-        const response = await fetch(
-            'genres/create',
+        await fetch(
+            'albums/create',
             {
                 method: "POST",
                 headers: {
@@ -42,12 +49,14 @@ function GenreModal(props) {
             if (response.status === 401) {
                 alert("Unauthorized user");
             }
-            else if (response.ok) {
+            else if (response.ok){
                 response.json().then(id => {
                     data["id"] = id;
                     console.log(data);
                     push(data);
                     setName("");
+					setReleaseDate("");
+					setArtist("");
                     setShow(false);
                 });
             } else {
@@ -65,13 +74,19 @@ function GenreModal(props) {
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Genre Designer</Modal.Title>
+                    <Modal.Title>Album Designer</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
 
                     <label htmlFor="name"><b>Name</b></label><br />
-                    <input type="text" placeholder="Genre name" name="name" defaultValue={name} onChange={handleNameChange}/><br />
+                    <input type="text" placeholder="Album name" name="name" defaultValue={name} onChange={handleNameChange}/><br />
                 
+					<label htmlFor="releaseDate"><b>Release date</b></label><br />
+                    <input type="date" placeholder="Release date" name="releaseDate" defaultValue={releaseDate} onChange={handleReleaseDateChange}/><br />
+
+					<label htmlFor="artist"><b>Artist</b></label><br />
+                    <input type="text" placeholder="Artist" name="artist" defaultValue={artist} onChange={handleArtistChange}/><br />
+
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
@@ -86,4 +101,4 @@ function GenreModal(props) {
     );
 }
 
-export default GenreModal;
+export default AlbumModal;
